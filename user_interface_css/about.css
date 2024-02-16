@@ -1,0 +1,100 @@
+.about {
+    background-color: #F9F9F9;
+    padding: 40px 0;
+}
+
+.about h2 {
+    font-size: 45px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+
+}
+
+.about h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: normal;
+}
+
+.about .content {
+    max-width: 90%;
+    margin: 0px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.about .content .bestdoctor-info {
+    width: 45%;
+}
+
+.about .content .bestdoctor-info h3 {
+    font-size: 38px;
+    font-weight: 700;
+    text-align: left;
+}
+
+.about .content .bestdoctor-info p {
+    font-size: 18px;
+    line-height: 30PX;
+    color: #39394A;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.about .content .bestdoctor-photo {
+    width: 45%;
+    text-align: center;
+}
+
+.about .content .bestdoctor-photo img {
+    max-width: 100%;
+    height: 500px;
+    width: 430px;
+}
+
+.about .content .doctor-card {
+    width: 350px;
+    height: 440px;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px 0 rgba(213, 213, 213, 0.2);
+}
+
+.about .content .doctor-card .padd {
+    padding: 20px;
+    text-align: center;
+}
+
+.about .content .doctor-card .padd h4 {
+    margin: 0;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.about .content .doctor-card .padd p {
+    margin-bottom: 0;
+    color: #666;
+}
+
+.about .content .doctor-card .img .doctor-img {
+    width: 100%;
+    height: 300px;
+    padding: 0;
+    border-radius: 20px 20px 0 0;
+    object-fit: cover;
+}
+
+.about .content .doctor-card:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+    transition: box-shadow 0.3s, transform 0.3s;
+}

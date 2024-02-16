@@ -1,0 +1,143 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-image: url(../../user_img/login-background.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container .card {
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #F1F1EF;
+    background-color: #ffffff78;
+    padding: 20px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2x);
+}
+
+.container .card .card-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.container .card .card-body form .form-group {
+    margin-bottom: 20px;
+}
+
+.container .card .card-body form .register-account {
+    font-size: 15px;
+    text-align: center !important;
+    padding: 10px 12px 0 14px;
+    color: #212529;
+    margin-bottom: 0;
+}
+
+.container .card .card-body form .register-account a {
+    font-size: 15px;
+    text-decoration: none;
+    color: #4b84fe;
+    font-weight: 500;
+}
+
+.container .card .card-body form .register-account-no-padd {
+    font-size: 15px;
+    text-align: center !important;
+    color: #212529;
+}
+
+.container .card .card-body form .register-account-no-padd a {
+    font-size: 15px;
+    text-decoration: none;
+    color: #4b84fe;
+    font-weight: 500;
+}
+
+.container .card .card-body form .form-group .form-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #535355;
+}
+
+.container .card .card-body form .form-group .text-danger {
+    font-size: 14px;
+    color: red;
+}
+
+.container .card .card-body form .form-group .form-control {
+    width: 100%;
+    height: 40px;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    outline: none;
+}
+
+.container .card .card-body form .form-group .form-control:focus {
+    border: 2px solid #4B84FE;
+}
+
+.container .card .card-body form .btn {
+    width: 100%;
+    height: 45px;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Style alert Start */
+.alert {
+    border: 1px solid transparent;
+    border-radius: 7px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.alert.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert.alert-success a {
+    color: #0b2e13;
+    text-decoration: underline;
+}
+
+.alert.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.alert-danger a {
+    color: #491217;
+}
+
+/* Style alert End */
+
+
+@media (max-width: 500px) {
+    .container .card {
+        width: 100%;
+        max-width: 250px;
+    }
+}

@@ -1,0 +1,115 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    scroll-behavior: smooth;
+    font-family: Arial, sans-serif;
+    background-color: #EDEFF7 !important;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.content-wrap .content .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.content-wrap .content .container .card {
+    width: 100%;
+    max-width: 400px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.content-wrap .content .container .card .card-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.content-wrap .content .container .card .card-body form .form-group {
+    margin-bottom: 20px;
+}
+
+.content-wrap .content .container .card .card-body form .form-group .form-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #535355;
+}
+
+.content-wrap .content .container .card .card-body form .form-group .text-danger {
+    font-size: 14px;
+    color: red;
+}
+
+.content-wrap .content .container .card .card-body form .form-group .form-control {
+    width: 100%;
+    height: 40px;
+    padding: 8px;
+    font-size: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+
+.content-wrap .content .container .card .card-body form .form-group .form-control:focus {
+    border: 1px solid #4B84FE;
+}
+
+.content-wrap .content .container .card .card-body form .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+
+.content-wrap .content .container .card .card-body form .buttons .width-btn-2 {
+    width: 100%;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.content-wrap .content .container .card .card-body form .buttons .btn-outline-info {
+    background-color: transparent;
+    border: 1px solid #17a2b8;
+    color: #17a2b8;
+}
+
+.content-wrap .content .container .card .card-body form .buttons .btn-primary {
+    background-color: #007bff;
+}
+
+.alert.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert {
+    border: 1px solid #c3e6cb;
+    border-radius: 7px;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.alert.alert-success a {
+    color: #0b2e13;
+    text-decoration: underline;
+}

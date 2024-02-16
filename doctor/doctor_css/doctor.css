@@ -1,0 +1,521 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    color: #99a0b0;
+    width: 100%;
+    min-height: 100%;
+    background-color: #EDEFF7 !important;
+    font-size: 16px;
+    line-height: 120%;
+    font-family: Open Sans, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+a:link,
+a:visited {
+    color: #99a0b0;
+    text-decoration: none;
+}
+
+a:active {
+    color: #99a0b0;
+}
+
+
+.dashboard {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.menu-wrap {
+    width: 300px;
+    padding-bottom: 3em;
+    background: #fff;
+    border-right: 1px solid #ede8f0;
+    height: 100vh;
+    overflow-y: auto;
+    position: fixed;
+}
+
+.menu-wrap .user {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.active {
+    border-bottom: 3px solid #4b84fe;
+}
+
+.menu-wrap .user .user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: black;
+    background-color: rgb(143, 195, 235);
+}
+
+.menu-wrap .user .user-avatar img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.menu-wrap .user h1 {
+    margin: 0;
+    padding: 0 0 0 1em;
+    color: #1b253d;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 100%;
+}
+
+.menu-wrap nav {
+    display: block;
+    padding: 0 2em;
+}
+
+.menu-wrap nav section {
+    display: block;
+    padding: 40px 0;
+}
+
+.menu-wrap nav h2 {
+    margin: auto;
+    font-size: 22px;
+    /* text-align: center; */
+    text-transform: uppercase;
+    color: #3F4254;
+    font-weight: 600;
+    padding-bottom: 10px;
+}
+
+.menu-wrap nav ul {
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-wrap nav li {
+    display: block;
+    padding: 0;
+    margin: 1em 0 0;
+    padding: 10px;
+}
+
+.menu-wrap nav li a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: #99a0b0;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.875em;
+    transition: color 0.15s ease;
+}
+
+.menu-wrap nav li a svg {
+    display: block;
+    margin-right: 1em;
+}
+
+.menu-wrap nav li a svg path,
+.menu-wrap nav li a svg circle {
+    fill: #b6bbc6;
+    transition: fill 0.15s ease;
+}
+
+.menu-wrap nav li a:hover {
+    color: #1b253d;
+}
+
+.menu-wrap nav li a:hover svg path,
+.menu-wrap nav li a:hover svg circle {
+    fill: #2b3a60;
+}
+
+.content-wrap .info-boxes .info-box.active {
+    border: 2px solid #4b84fe;
+    color: #4b84fe;
+}
+
+.content-wrap {
+    flex: 1;
+    padding: 0 48px 48px 48px;
+    overflow: auto;
+    margin-left: 300px;
+}
+
+.content-wrap .info-boxes {
+    padding: 40px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2em;
+}
+
+.content-wrap .info-boxes .info-box {
+    background: #fff;
+    height: 160px;
+    width: 350px;
+    display: flex;
+    /* flex: 1; */
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 3em;
+    border: 1px solid #ede8f0;
+    border-radius: 5px;
+}
+
+
+.content-wrap .info-boxes .info-box .box-icon svg {
+    display: block;
+    width: 48px;
+    height: 48px;
+}
+
+.content-wrap .info-boxes .info-box .box-icon svg path,
+.content-wrap .info-boxes .info-box .box-icon svg circle {
+    fill: #99a0b0;
+}
+
+.content-wrap .info-boxes .info-box .box-content {
+    padding-left: 1.25em;
+    white-space: nowrap;
+}
+
+.content-wrap .info-boxes .info-box .box-content .big {
+    display: block;
+    font-size: 2em;
+    line-height: 150%;
+    color: #1b253d;
+}
+
+.content-wrap .info-boxes .info-box.active svg circle,
+.content-wrap .info-boxes .info-box.active svg path {
+    fill: #4b84fe;
+}
+
+.doctors-info {
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2em;
+}
+
+.table-doctors {
+    width: 100%;
+    background-color: #F8F8F8;
+    border-radius: 10px;
+}
+
+.table-doctors h4 {
+    padding: 8px 15px;
+    font-size: 18px;
+    font-weight: 500;
+    height: 38px;
+    margin: 5px;
+    color: #3F4254;
+}
+
+.doctors-info .table-doctors table {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 0 0 10px 10px;
+}
+
+.doctors-info .table-doctors table thead td,
+.doctors-info .table-doctors table thead th {
+    border-bottom-width: 1px;
+}
+
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+    border: 1px solid #E0E0E0;
+}
+
+.doctors-info .table-doctors table thead th {
+    padding: 8px;
+    height: 50px;
+    color: black;
+    font-size: 20px;
+}
+
+.doctors-info .table-doctors table tbody .column-tdBtn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.doctors-info .table-doctors table tbody td {
+    font-size: 16px;
+    color: #3F4254;
+    padding: 8px;
+    height: 40px;
+}
+
+.doctors-info .table-doctors table tbody .btn {
+    width: 85px !important;
+}
+
+.doctors-info .table-doctors table tbody .action-icons {
+    font-size: 16px;
+}
+
+.doctors-info .table-doctors table tbody a .details-icon {
+    fill: #7ad47a;
+}
+
+.doctors-info .table-doctors table tbody a .update-icon {
+    fill: #4b84fe;
+}
+
+.doctors-info .table-doctors table tbody a .delete-icon {
+    fill: red;
+}
+
+
+.doctors-info .table-doctors table thead .column-doctorId {
+    border-radius: 10px 0 0 0;
+}
+
+.doctors-info .table-doctors table thead .column-actionBtn {
+    border-radius: 0 10px 0 0;
+}
+
+.doctors-info .table-doctors table tbody tr:last-child .column-tdId {
+    border-radius: 0 0 0 10px;
+}
+
+.doctors-info .table-doctors table tbody tr:last-child .column-tdBtn {
+    border-radius: 0 0 10px 0;
+}
+
+.doctors-info .table-doctors table thead .column-actionBtn {
+    width: 200px !important;
+}
+
+/* border radius per faqen medical dhe stilizime tjera */
+.doctors-info .table-doctors table thead .column-appointmentId {
+    border-radius: 10px 0 0 0;
+}
+
+.doctors-info .table-doctors table tbody tr:last-child .column-tdAppointmentId {
+    border-radius: 0 0 0 10px;
+}
+
+.doctors-info .table-doctors table thead .column-appointmentId {
+    width: 220px;
+}
+
+.alert.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert {
+    border: 1px solid #c3e6cb;
+    border-radius: 7px;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.alert.alert-success a {
+    color: #0b2e13;
+    text-decoration: underline;
+}
+
+
+.hamburger-menu {
+    display: none;
+    font-size: 20px;
+    background-color: transparent;
+}
+
+/** Responsive Design */
+@media (max-width: 1470px) {
+    .content-wrap .info-boxes .info-box {
+        height: 160px;
+        width: 300px;
+    }
+}
+
+@media (max-width: 850px) {
+    .active {
+        border: none;
+    }
+
+    .content-wrap {
+        padding: 0 20px;
+    }
+
+    .menu-wrap {
+        display: none;
+        width: 100%;
+    }
+
+    .hamburger-menu {
+        border: none;
+        display: block;
+        position: fixed;
+        right: 0;
+        top: 10px;
+        background-color: white;
+        margin-right: 30px;
+        border-radius: 5PX;
+    }
+
+    .openbtn {
+        border: none;
+        border-radius: 10px;
+        display: block;
+        font-size: 30px;
+        background-color: transparent;
+    }
+
+    .closebtn {
+        border: none;
+        display: none;
+        border-radius: 10px;
+        font-size: 40px;
+        background-color: transparent;
+    }
+
+    .content-wrap {
+        margin-left: 0px !important;
+    }
+
+    .content-wrap .info-boxes {
+        max-width: 100%;
+        gap: 10px;
+    }
+
+    .content-wrap .info-boxes .info-box {
+        height: 160px;
+        width: 240px;
+        padding: 10px;
+    }
+
+    .content-wrap .info-boxes .info-box .box-content {
+        white-space: normal;
+    }
+
+    .doctors-info .table-doctors table thead .column-appointmentId {
+        width: 50px !important;
+
+    }
+}
+
+@media (max-width: 780px) {
+
+    .content-wrap {
+        padding: 0 20px;
+    }
+
+    .content-wrap .info-boxes {
+        max-width: 100%;
+        gap: 10px;
+    }
+
+    .content-wrap .info-boxes {
+        padding: 40px 0;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2em;
+    }
+
+    .content-wrap .info-boxes .info-box {
+        height: 160px;
+        width: 100%;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-self: center;
+    }
+
+    .content-wrap .info-boxes .info-box .box-content {
+        white-space: nowrap;
+    }
+
+    .doctors-info .table-doctors table thead th,
+    .doctors-info .table-doctors table tbody tr {
+        font-size: 14px;
+    }
+
+}
+
+@media (max-width: 600px) {
+    .active {
+        border-bottom: 3px solid #4b84fe;
+    }
+
+    .content-wrap {
+        padding: 0 20px;
+    }
+
+    .doctors-info .table-doctors table thead th {
+        padding: 0 3px;
+        height: 50px;
+        color: black;
+    }
+
+    .doctors-info .table-doctors table thead .column-actionBtn {
+        width: 50px !important;
+
+    }
+
+    .doctors-info .table-doctors table thead th,
+    .doctors-info .table-doctors table tbody td {
+        font-size: 12px;
+    }
+
+    .doctors-info .table-doctors table tbody td {
+        color: #3F4254;
+        padding: 0 3px;
+        height: auto;
+        text-align: center;
+    }
+
+    .doctors-info .table-doctors table tbody td svg {
+        height: 20px;
+        width: 20px;
+    }
+
+    .doctors-info .table-doctors table tbody .column-tdBtn {
+        display: flex;
+        flex-direction: column;
+        height: 100px;
+    }
+
+    .doctors-info .table-doctors table thead .column-appointmentId {
+        width: 50px !important;
+
+    }
+}

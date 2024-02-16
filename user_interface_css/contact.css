@@ -1,0 +1,38 @@
+.contact {
+    background-color: white;
+    padding: 40px 0 80px 0;
+}
+
+.contact h2 {
+    font-size: 45px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+
+}
+
+.contact .content {
+    max-width: 90%;
+    margin: 0px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.contact .content .contact-photo {
+    width: 45%;
+    text-align: center;
+}
+
+.contact .content .contact-photo img {
+    /*max-width: 100%; */
+    height: auto;
+    width: 800px;
+}
+
+.contact .content .contact-info {
+    width: 45%;
+}

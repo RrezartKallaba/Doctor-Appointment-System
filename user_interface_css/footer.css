@@ -1,0 +1,101 @@
+footer {
+    padding: 40px 0 0 0;
+    overflow: hidden;
+    background-color: #F9F9F9;
+}
+
+footer .content {
+    max-width: 90%;
+    margin: 0px auto;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+footer .content .left-content {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+}
+
+footer .content .left-content h2 {
+    font-size: 25px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+footer .content .left-content a {
+    padding: 7px 0;
+    font-size: 15px;
+    color: #666;
+}
+
+footer .content .left-content i {
+    padding-right: 10px;
+    color: #007bff;
+}
+
+footer .content .center-content {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+}
+
+footer .content .center-content h2 {
+    font-size: 25px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+footer .content .center-content a {
+    padding: 7px 0;
+    font-size: 15px;
+    color: #666;
+}
+
+footer .content .center-content i {
+    padding-right: 10px;
+    color: #007bff;
+}
+
+footer .content .right-content {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+}
+
+footer .content .right-content h2 {
+    font-size: 25px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+footer .content .right-content a {
+    padding: 7px 0;
+    font-size: 15px;
+    color: #666;
+}
+
+footer .content .right-content i {
+    padding-right: 10px;
+    color: #007bff;
+}
+
+footer .created {
+    width: 90%;
+    border-top: 1px solid rgb(203, 203, 203);
+    margin: 15px auto 0 auto;
+    height: 50px;
+}
+
+footer .created p {
+    text-align: center;
+    font-size: 18px;
+    margin: 0;
+    padding: 10px 0;
+}

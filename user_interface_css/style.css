@@ -1,0 +1,461 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+@import url("nav.css");
+@import url("home.css");
+@import url("about.css");
+@import url("contact.css");
+@import url("footer.css");
+@import url("user_form.css");
+@import url("appointment.css");
+
+* {
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+}
+
+html,
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    scroll-behavior: smooth;
+    overflow-x: hidden !important;
+}
+
+section {
+    width: 100%;
+}
+
+.line {
+    display: none;
+    border-bottom: 0.5px solid rgba(114, 114, 114, 0.466);
+}
+
+a.active {
+    color: #4B84FE;
+    /* border-color: var(--skin-color); */
+    /* border-radius: 25px; */
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+/* Style alert Start */
+.alert {
+    border: 1px solid transparent;
+    border-radius: 7px;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.alert.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert.alert-success a {
+    color: #0b2e13;
+    text-decoration: underline;
+}
+
+.alert.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.alert-danger a {
+    color: #491217;
+}
+
+/* Style alert End */
+
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+    .home .content h1 {
+        font-size: 42px;
+    }
+
+    .about .content .doctor-card {
+        width: 300px;
+    }
+
+    .contact .content .contact-photo {
+        width: 45%;
+        text-align: center;
+    }
+
+    .contact .content .contact-photo img {
+        height: auto;
+        width: 700px;
+    }
+
+    .contact .content .contact-info {
+        width: 45%;
+    }
+
+    .appointments .content {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 1300px) {
+    .contact .content .contact-photo {
+        width: 45%;
+        text-align: center;
+    }
+
+    .contact .content .contact-photo img {
+        height: auto;
+        width: 600px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .contact .content {
+        max-width: 90%;
+        margin: 0px auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .contact .content .contact-photo {
+        width: 100%;
+        text-align: center;
+    }
+
+    .contact .content .contact-photo img {
+        height: auto;
+        width: 800px;
+    }
+
+    .appointments .content {
+        min-height: 100vh;
+        max-width: 90%;
+        margin: 0px auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .appointments .content .appointments-photo {
+        width: 45%;
+        text-align: center;
+    }
+
+    .appointments .content .appointments-photo img {
+        width: 100%;
+        height: 500px;
+    }
+
+}
+
+@media (max-width: 1400px) {
+    .appointments .content {
+        max-width: 90%;
+    }
+
+    .appointments .content .appointments-photo {
+        width: 100%;
+        text-align: center;
+    }
+
+    .appointments .content .appointments-photo img {
+        max-width: 80%;
+        height: 500px;
+    }
+}
+
+@media (max-width: 1050px) {
+    .about .content .doctor-card {
+        width: 250px;
+    }
+}
+
+@media (max-width: 850px) {
+
+    /* Navbar design start */
+    header {
+        box-shadow: none;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    header img {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .hamburger-menu {
+        display: block;
+        position: absolute;
+        right: 0;
+        margin-right: 30px;
+    }
+
+    .openbtn {
+        display: block;
+        font-size: 30px;
+        background-color: transparent;
+    }
+
+    .closebtn {
+        display: none;
+        font-size: 40px;
+        background-color: transparent;
+    }
+
+    header nav {
+        height: 100%;
+        width: 100%;
+        position: fixed !important;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .menu {
+        display: none;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        margin: 0;
+        background-color: white;
+        z-index: 99;
+        padding-top: 30px;
+        transition: 0.5s;
+    }
+
+    .menu a {
+        display: block;
+        padding: 12px 40px 12px 16px !important;
+        text-decoration: none;
+        color: black;
+        height: 45px !important;
+        width: 90%;
+        margin: 10px auto;
+        background-color: #F8F9F9;
+        border-radius: 20px;
+        text-align: center;
+    }
+
+    .home {
+        background-image: url("../user_img/bg_photo_phone.png");
+    }
+
+    .home .content {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .home .content h1 {
+        font-size: 32px;
+        margin-bottom: 20px;
+        color: white;
+        text-align: center;
+        width: 100%;
+    }
+
+    .home .content p {
+        font-size: 17px;
+        margin-bottom: 30px;
+        color: white;
+    }
+
+
+    .about .content {
+        max-width: 90%;
+    }
+
+    .about .content .doctor-card {
+        width: 230px;
+        height: 440px;
+        background-color: white;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        border-radius: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px 0 rgba(213, 213, 213, 0.2);
+    }
+
+
+    .contact .content {
+        max-width: 90%;
+        margin: 0px auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .contact .content .contact-photo {
+        width: 100%;
+        text-align: center;
+    }
+
+    .contact .content .contact-photo img {
+        height: auto;
+        width: 650px;
+    }
+}
+
+@media(max-width:767px) {
+    .about .content .doctor-card {
+        width: 70%;
+        height: auto;
+        background-color: white;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        border-radius: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px 0 rgba(213, 213, 213, 0.2);
+    }
+
+}
+
+@media (max-width: 600px) {
+    .about h2 {
+        font-size: 32px;
+    }
+
+    .about .content {
+        display: flex;
+        flex-direction: column;
+        max-width: 90%;
+    }
+
+    .about .content .bestdoctor-info {
+        width: 90%;
+        text-align: justify;
+    }
+
+    .about .content .bestdoctor-info h3 {
+        font-size: 26px;
+    }
+
+    .about .content .bestdoctor-photo {
+        display: none;
+    }
+
+    .contact .content .contact-photo {
+        width: 100%;
+        text-align: center;
+    }
+
+    .contact .content .contact-photo img {
+        height: auto;
+        width: 100%;
+    }
+
+    .appointments {
+        margin-top: 50px;
+    }
+
+    .appointments .content .appointments-photo img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    footer .content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    footer .content .left-content {
+        width: 100%;
+    }
+
+    footer .content .center-content {
+        width: 100%;
+    }
+
+    footer .content .right-content {
+        width: 100%;
+    }
+}
+
+@media (max-width: 420px) {
+
+    .about .content .bestdoctor-info h3 {
+        font-size: 20px;
+    }
+
+    .about .content .doctor-card {
+        width: 100%;
+        height: 440px;
+        background-color: white;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        border-radius: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px 0 rgba(213, 213, 213, 0.2);
+    }
+
+    .contact h2 {
+        font-size: 32px;
+    }
+
+    .contact .content {
+        max-width: 90%;
+    }
+
+    .contact .content .contact-photo {
+        width: 100%;
+    }
+
+    .contact .content .contact-photo img {
+        height: auto;
+        width: 100%;
+    }
+
+    .contact .content .contact-info {
+        width: 100%;
+    }
+
+
+
+    footer .content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    footer .content .left-content {
+        width: 100%;
+    }
+
+    footer .content .center-content {
+        width: 100%;
+    }
+
+    footer .content .right-content {
+        width: 100%;
+    }
+}
