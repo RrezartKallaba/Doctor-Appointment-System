@@ -32,7 +32,7 @@ function cleanInputs($input)
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["appointment"])) {
     $username = cleanInputs($_POST["username"]);
     $usersurname = cleanInputs($_POST["usersurname"]);
-    $useremail = cleanInputs($_POST["useremail"]);
+    $useremail = $_SESSION["useremail"];
     $userappointmentdate = $_POST["userappointmentdate"];
     $doctor_id = explode('|', cleanInputs($_POST['doctor_id']))[0];
 
@@ -52,13 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["appointment"])) {
         $usersurnameError = "Last name can contain only letters.";
     }
 
-    if (empty($useremail)) {
-        $error = true;
-        $useremailError = "Email is required";
-    } else if (!filter_var($useremail, FILTER_VALIDATE_EMAIL)) {
-        $error = true;
-        $useremailError = "Please enter a valid email address.";
-    }
 
     $currentDate = date("Y-m-d"); // Marrja e dates aktuale
     if (empty($userappointmentdate)) {
@@ -73,18 +66,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["appointment"])) {
         $doctor_idError = "Please select a doctor.";
     }
     if (!$error) {
-        if (isset($_SESSION["user"])) {
-            $user_id = $_SESSION["user"];
-            $sql = "INSERT INTO appointments (user_id, doctor_id, patient_name, appointment_date) VALUES (?, ?, ?, ?)";
-            $stmt = mysqli_prepare($connect, $sql);
-            mysqli_stmt_bind_param($stmt, "iiss", $user_id, $doctor_id, $patient_name, $userappointmentdate);
-            $patient_name = $username . " " . $usersurname;
-        } else {
-            $sql = "INSERT INTO appointments (doctor_id, patient_name, emailuser_unregistred, appointment_date) VALUES (?, ?, ?, ?)";
-            $stmt = mysqli_prepare($connect, $sql);
-            mysqli_stmt_bind_param($stmt, "isss", $doctor_id, $patient_name, $useremail, $userappointmentdate);
-            $patient_name = $username . " " . $usersurname;
-        }
+
+        $user_id = $_SESSION["user"];
+        $sql = "INSERT INTO appointments (user_id, doctor_id, patient_name, appointment_date) VALUES (?, ?, ?, ?)";
+        $stmt = mysqli_prepare($connect, $sql);
+        mysqli_stmt_bind_param($stmt, "iiss", $user_id, $doctor_id, $patient_name, $userappointmentdate);
+        $patient_name = $username . " " . $usersurname;
 
         if (mysqli_stmt_execute($stmt)) {
             try {
@@ -217,10 +204,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["appointment"])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Meta Tags per SEO -->
+    <meta name="description" content="e-Mjekësia platformë për rezervimin e takimeve mjekësore online, care, medical, home, services, appointment, name, login.">
+    <meta name="keywords" content="e-Mjekësia, takime mjekësore, konsultat mjekësore, menaxhimi i kujdesit shëndetësor, rezervimi i takimeve,contact, platformë mjekësore">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Open Graph Tags per Shperndarje ne Rrjetet Sociale -->
+    <meta property="og:title" content="e-Mjekësia - Sistemi i Avancuar për Takime Mjekësore Online">
+    <meta property="og:description" content="e-Mjekësia ofron një platformë të avancuar për rezervimin e takimeve mjekësore online.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.arti-tech.online">
+    <meta property="og:image" content="https://www.arti-tech.online/user_img/logo.png">
+
+    <!-- Twitter Card Tags për Shpërndarje ne Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="e-Mjekësia - Sistemi i Avancuar për Takime Mjekësore Online">
+    <meta name="twitter:description" content="e-Mjekësia ofron një platformë të avancuar për rezervimin e takimeve mjekësore online.">
+    <meta name="twitter:image" content="https://www.arti-tech.online/user_img/logo.png">
+    <link rel="canonical" href="https://www.arti-tech.online">
+    <meta name="robots" content="index, follow">
+
     <link rel="stylesheet" href="user_interface_css/style.css">
     <link rel="icon" href="user_img/logo_ikone.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <title>Appointment</title>
+    <title>Appointment page</title>
+
     <style>
         .alert.alert-success,
         .alert.alert-danger {
@@ -233,8 +241,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["appointment"])) {
 </head>
 
 <body>
+
     <header>
-        <img id="img1" src="user_img/logo.png" alt="" srcset="">
+        <img id="img1" src="user_img/logo.png" alt="Logo" srcset="">
         <div class="hamburger-menu" onclick="toggleMenu()">
             <button class="openbtn">&#9776;</button>
             <button class="closebtn">&times;</button>
@@ -345,55 +354,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["appointment"])) {
                 </div>
                 <div class="card-body">
                     <?php if (!isset($_SESSION["user"])) { ?>
-                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off">
+                        <form style="filter: blur(3px);" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off">
                             <div class="row">
                                 <div class="form-group">
                                     <label for="username" class="form-label">First name:</label>
-                                    <input type="text" name="username" class="form-control" value="<?php if (empty($usernameError)) echo $username; ?>">
-                                    <span class="text-danger"><?= $usernameError ?></span>
+                                    <div class="form-control"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="usersurname" class="form-label">Last name:</label>
-                                    <input type="text" name="usersurname" class="form-control" value="<?php if (isset($usersurnameError)) echo $usersurname; ?>">
-                                    <span class="text-danger"><?= $usersurnameError ?></span>
+                                    <div class="form-control"></div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group">
                                     <label for="useremail" class="form-label">Email:</label>
-                                    <input type="email" name="useremail" class="form-control" value="<?php if (empty($useremailError)) echo $useremail; ?>">
-                                    <span class="text-danger"><?= $useremailError ?></span>
+                                    <div class="form-control"></div>
                                 </div>
 
                             </div>
                             <div class="row">
                                 <div class="form-group">
                                     <label for="userappointmentdate" class="form-label">Appoint. Date:</label>
-                                    <input type="date" name="userappointmentdate" class="form-control" value="<?php echo (empty($userappointmentdateError)) ? $userappointmentdate : ''; ?>">
-                                    <span class="text-danger"><?= $userappointmentdateError ?></span>
+                                    <div class="form-control"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="doctor_id" class="form-label">Select Doctor:</label>
-                                    <select name="doctor_id" id="doctor_id" class="form-control">
-                                        <?php
-                                        require_once "validate/connect.php";
-                                        $doctorQuery = "SELECT * FROM doctors";
-                                        $doctorResult = mysqli_query($connect, $doctorQuery);
-                                        echo "<option value='null'>Please select a doctor</option>";
-                                        while ($doctorRow = mysqli_fetch_assoc($doctorResult)) {
-                                            $doctorValue = $doctorRow['doctor_id'] . '|' . $doctorRow['name'] . '|' . $doctorRow['specialization'];
-                                            echo "<option value='{$doctorValue}'";
-                                            echo ">{$doctorRow['doctor_id']} - {$doctorRow['name']}- {$doctorRow['specialization']}</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                    <span class="text-danger"><?= $doctor_idError ?></span>
+                                    <div class="form-control"></div>
                                 </div>
                             </div>
                             <div class="button">
-                                <button type="submit" name="appointment" class="btn">Submit</button>
+                                <button class="btn">Submit</button>
                             </div>
                         </form>
+                        <p style="text-align: center;">You need to <a href="login/login.php">login</a> to book an appointment.</p>
                     <?php
                     } else { ?>
                         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off">
@@ -430,7 +423,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["appointment"])) {
                             <div class="row">
                                 <div class="form-group">
                                     <label for="useremail" class="form-label">Email:</label>
-                                    <input type="email" name="useremail" class="form-control" value="<?php echo $_SESSION["useremail"];  ?>">
+                                    <div class="form-control" disabled style="cursor: not-allowed !important;color: grey"><?php echo $_SESSION["useremail"];  ?></div>
                                     <span class="text-danger"><?= $useremailError ?></span>
                                 </div>
 

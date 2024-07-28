@@ -84,19 +84,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     if (!$error) {
-        $userpassword = hash("sha256", $userpassword);
-        $query = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+        // Generate a unique salt
+        $salt = bin2hex(random_bytes(16)); // 16 bytes = 128 bits
+        // Combine salt with password
+        $saltedPassword = $salt . $userpassword;
+        // Hash the salted password
+        $hashedPassword = hash("sha256", $saltedPassword);
+    
+        $query = "INSERT INTO users (username, email, password, salt) VALUES (?, ?, ?, ?)";
         $stmt = mysqli_prepare($connect, $query);
         $fullname = $username . " " . $usersurname;
-        mysqli_stmt_bind_param($stmt, "sss", $fullname, $useremail, $userpassword);
+        mysqli_stmt_bind_param($stmt, "ssss", $fullname, $useremail, $hashedPassword, $salt);
         if (mysqli_stmt_execute($stmt)) {
-            $_SESSION["user-registred"] = "✅ Account has been created";
+            $_SESSION["user-registered"] = "✅ Account has been created";
             header("refresh: 3; url=../login/login.php");
         } else {
-            $_SESSION["user-registred-error"] = "❌ Something went wrong, please try again later ...";
+            $_SESSION["user-registered-error"] = "❌ Something went wrong, please try again later ...";
         }
         mysqli_stmt_close($stmt);
     }
+    
 }
 // Validimi i regjistrimit fundi
 ?>
@@ -223,6 +230,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("contextmenu", function(e) {
+            e.preventDefault();
+        }, false);
+
+        document.addEventListener("keydown", function(e) {
+            if (e.key == "F12" || (e.ctrlKey && e.shiftKey && e.key == "I")) {
+                e.preventDefault();
+            }
+        });
+    </script>
 </body>
 
 </html>

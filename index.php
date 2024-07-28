@@ -24,6 +24,7 @@ function cleanInputs($input)
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["contactform"])) {
     $username = cleanInputs($_POST["username"]);
     $usersurname = cleanInputs($_POST["usersurname"]);
+    $user_id = $_SESSION["user"];
     $useremail = cleanInputs($_POST["useremail"]);
     $usertextarea = cleanInputs($_POST["usertextarea"]);
 
@@ -57,9 +58,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["contactform"])) {
     }
 
     if (!$error) {
-        $sql = "INSERT INTO contactform (first_name, last_name, email, message) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO contactform (user_id, first_name, last_name, email, message) VALUES (?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($connect, $sql);
-        mysqli_stmt_bind_param($stmt, "ssss", $username, $usersurname, $useremail, $usertextarea);
+        mysqli_stmt_bind_param($stmt, "issss", $user_id, $username, $usersurname, $useremail, $usertextarea);
         if (mysqli_stmt_execute($stmt)) {
             $_SESSION["contact_form"] = "✅Contact form submitted successfully.";
             header("Location: index.php");
@@ -81,15 +82,55 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["contactform"])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Meta Tags per SEO -->
+    <meta name="description" content="e-Mjekësia platformë për rezervimin e takimeve mjekësore online, care, medical, home, services, appointment, name, login.">
+    <meta name="keywords" content="e-Mjekësia, takime mjekësore, konsultat mjekësore, menaxhimi i kujdesit shëndetësor, rezervimi i takimeve,contact, platformë mjekësore">
+    <meta name="author" content="e-Mjekësia">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Open Graph Tags per Shperndarje ne Rrjetet Sociale -->
+    <meta property="og:title" content="e-Mjekësia - Sistemi i Avancuar për Takime Mjekësore Online">
+    <meta property="og:description" content="e-Mjekësia ofron një platformë të avancuar për rezervimin e takimeve mjekësore online.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.arti-tech.online">
+    <meta property="og:image" content="https://www.arti-tech.online/user_img/logo.png">
+
+    <!-- Twitter Card Tags për Shpërndarje ne Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="e-Mjekësia - Sistemi i Avancuar për Takime Mjekësore Online">
+    <meta name="twitter:description" content="e-Mjekësia ofron një platformë të avancuar për rezervimin e takimeve mjekësore online.">
+    <meta name="twitter:image" content="https://www.arti-tech.online/user_img/logo.png">
+    <link rel="canonical" href="https://www.arti-tech.online">
+    <meta name="robots" content="index, follow">
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "LocalBusiness",
+            "name": "E-mjekësija",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Suhareke",
+                "addressLocality": "Suhareke",
+                "addressRegion": "Prizren",
+                "postalCode": "2000",
+                "addressCountry": "Kosova"
+            },
+            "telephone": "+383",
+            "url": "https://www.arti-tech.online"
+        }
+    </script>
+
     <link rel="stylesheet" href="user_interface_css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link rel="icon" href="user_img/logo_ikone.png" type="image/x-icon">
-    <title>Home</title>
+    <title>Home page</title>
 </head>
 
 <body>
+
     <header>
-        <img id="img1" src="user_img/logo.png" alt="" srcset="">
+        <img id="img1" src="user_img/logo.png" alt="Logo" srcset="">
         <div class="hamburger-menu" onclick="toggleMenu()">
             <button class="openbtn">&#9776;</button>
             <button class="closebtn">&times;</button>

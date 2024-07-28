@@ -193,7 +193,7 @@ if (isset($_SESSION["admin"])) {
                                         <td class="column-tdId">' . $rowTodayControls["doctor_id"] . '</td>
                                         <td class="column-tdName">' . $rowTodayControls["name"] . '</td>
                                         <td class="column-tdAppoId">' . $rowTodayControls["appointment_id"] . '</td>
-                                        <td class="column-tdPacName">' . $rowTodayControls["patient_name"] . '</td> 
+                                        <td class="column-tdPacName">' . $rowTodayControls["patient_name"] . '</td>
                                         <td class="column-tdDate">' . $rowTodayControls["appointment_date"] . '</td>
                                         </tr>';
                                         }
@@ -234,7 +234,7 @@ if (isset($_SESSION["admin"])) {
                                         <td class="column-tdId">' . $rowUpcomingControls["doctor_id"] . '</td>
                                         <td class="column-tdName">' . $rowUpcomingControls["name"] . '</td>
                                         <td class="column-tdAppoId">' . $rowUpcomingControls["appointment_id"] . '</td>
-                                        <td class="column-tdPacName">' . $rowUpcomingControls["patient_name"] . '</td> 
+                                        <td class="column-tdPacName">' . $rowUpcomingControls["patient_name"] . '</td>
                                         <td class="column-tdDate">' . $rowUpcomingControls["appointment_date"] . '</td>
                                         </tr>';
                                         }

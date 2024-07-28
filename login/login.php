@@ -42,78 +42,98 @@ if (isset($_POST["login"])) {
         $userpasswordError = "Password is required.";
     }
     if (!$error) {
-        $userpassword = hash("sha256", $userpassword);
-
-        $sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+        // Prepare and execute the query to retrieve the user's salt
+        $sql = "SELECT salt, password, is_banned, status, user_id, email, username FROM users WHERE email = ?";
         $stmt = mysqli_prepare($connect, $sql);
-        mysqli_stmt_bind_param($stmt, "ss", $useremail, $userpassword);
+        mysqli_stmt_bind_param($stmt, "s", $useremail);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
+    
         if (mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_assoc($result);
-
-            if ($row["is_banned"] === 'Yes') {
-                $_SESSION["banned_user"] = "❌ You are banned from this site.";
-            } else {
-                if ($row["status"] == "user") {
-                    $_SESSION["user"] = $row["user_id"];
-                    $_SESSION["useremail"] = $row["email"];
-                    $_SESSION["username"] = $row["username"];
-                    $_SESSION["status"] = $row["status"];
-
-
-                    $user_id = $_SESSION["user"];
-                    $user_email = $_SESSION["useremail"];
-                    $status = $_SESSION["status"];
-                    $login_time = date('H:i:s');
-                    $login_date = date('Y-m-d');
-
-                    $sql_insert01 = "INSERT INTO time_datelogin (user_id, user_email, status, time, date) VALUES ('$user_id', '$user_email', '$status', '$login_time', '$login_date')";
-                    mysqli_query($connect, $sql_insert01);
-
-
-                    header("Location: ../index.php");
-                } else if ($row["status"] == "doctor") {
-                    $_SESSION["doctor"] = $row["user_id"];
-                    $_SESSION["doctoremail"] = $row["email"];
-                    $_SESSION["doctorname"] = $row["username"];
-                    $_SESSION["status"] = $row["status"];
-
-                    $doctor_id = $_SESSION["doctor"];
-                    $doctor_email = $_SESSION["doctoremail"];
-                    $status = $_SESSION["status"];
-                    $login_time = date('H:i:s');
-                    $login_date = date('Y-m-d');
-
-                    $sql_insert01 = "INSERT INTO time_datelogin (user_id, user_email, status, time, date) VALUES ('$doctor_id', '$doctor_email', '$status', '$login_time', '$login_date')";
-                    mysqli_query($connect, $sql_insert01);
-
-
-                    header("Location: ../doctor/index.php");
-                } else if ($row["status"] == "admin") {
-                    $_SESSION["admin"] = $row["user_id"];
-                    $_SESSION["adminemail"] = $row["email"];
-                    $_SESSION["adminfullname"] = $row["username"];
-                    $_SESSION["status"] = $row["status"];
-
-                    $admin_id = $_SESSION["admin"];
-                    $admin_email = $_SESSION["adminemail"];
-                    $admin_fullname = $_SESSION["adminfullname"];
-                    $status = $_SESSION["status"];
-                    $login_time = date('H:i:s');
-                    $login_date = date('Y-m-d');
-
-                    $sql_insert01 = "INSERT INTO time_datelogin (user_id, user_email, status, time, date) VALUES ('$admin_id', '$admin_email', '$status', '$login_time', '$login_date')";
-                    mysqli_query($connect, $sql_insert01);
-
-
-                    header("Location: ../admin/dashboard.php");
+            $salt = $row["salt"];
+            $hashedPasswordFromDb = $row["password"];
+    
+            // Combine retrieved salt with the entered password
+            $saltedPassword = $salt . $userpassword;
+            // Hash the salted password
+            $hashedPassword = hash("sha256", $saltedPassword);
+    
+            // Verify the hashed password
+            if ($hashedPassword === $hashedPasswordFromDb) {
+                if ($row["is_banned"] === 'Yes') {
+                    $_SESSION["banned_user"] = "❌ You are banned from this site.";
+                } else {
+                    if ($row["status"] == "user") {
+                        $_SESSION["user"] = $row["user_id"];
+                        $_SESSION["useremail"] = $row["email"];
+                        $_SESSION["username"] = $row["username"];
+                        $_SESSION["status"] = $row["status"];
+    
+                        $user_id = $_SESSION["user"];
+                        $user_email = $_SESSION["useremail"];
+                        $status = $_SESSION["status"];
+                        $login_time = date('H:i:s');
+                        $login_date = date('Y-m-d');
+                        $sql_insert01 = "INSERT INTO time_datelogin (user_id, user_email, status, time, date) VALUES (?, ?, ?, ?, ?)";
+                        $stmt_insert = mysqli_prepare($connect, $sql_insert01);
+                        if (!$stmt_insert) {
+                            die("Prepare failed: (" . $connect->errno . ") " . $connect->error);
+                        }
+                        mysqli_stmt_bind_param($stmt_insert, "issss", $user_id, $user_email, $status, $login_time, $login_date);
+                        mysqli_stmt_execute($stmt_insert);
+                        mysqli_stmt_close($stmt_insert);
+    
+                        header("Location: ../index.php");
+                    } else if ($row["status"] == "doctor") {
+                        $_SESSION["doctor"] = $row["user_id"];
+                        $_SESSION["doctoremail"] = $row["email"];
+                        $_SESSION["doctorname"] = $row["username"];
+                        $_SESSION["status"] = $row["status"];
+    
+                        $doctor_id = $_SESSION["doctor"];
+                        $doctor_email = $_SESSION["doctoremail"];
+                        $status = $_SESSION["status"];
+                        $login_time = date('H:i:s');
+                        $login_date = date('Y-m-d');
+                        $sql_insert01 = "INSERT INTO time_datelogin (user_id, user_email, status, time, date) VALUES (?, ?, ?, ?, ?)";
+                        $stmt_insert = mysqli_prepare($connect, $sql_insert01);
+                        mysqli_stmt_bind_param($stmt_insert, "issss", $doctor_id, $doctor_email, $status, $login_time, $login_date);
+                        mysqli_stmt_execute($stmt_insert);
+                        mysqli_stmt_close($stmt_insert);
+    
+                        header("Location: ../doctor/index.php");
+                    } else if ($row["status"] == "admin") {
+                        $_SESSION["admin"] = $row["user_id"];
+                        $_SESSION["adminemail"] = $row["email"];
+                        $_SESSION["adminfullname"] = $row["username"];
+                        $_SESSION["status"] = $row["status"];
+    
+                        $admin_id = $_SESSION["admin"];
+                        $admin_email = $_SESSION["adminemail"];
+                        $admin_fullname = $_SESSION["adminfullname"];
+                        $status = $_SESSION["status"];
+                        $login_time = date('H:i:s');
+                        $login_date = date('Y-m-d');
+                        $sql_insert01 = "INSERT INTO time_datelogin (user_id, user_email, status, time, date) VALUES (?, ?, ?, ?, ?)";
+                        $stmt_insert = mysqli_prepare($connect, $sql_insert01);
+                        mysqli_stmt_bind_param($stmt_insert, "issss", $admin_id, $admin_email, $status, $login_time, $login_date);
+                        mysqli_stmt_execute($stmt_insert);
+                        mysqli_stmt_close($stmt_insert);
+    
+                        header("Location: ../admin/dashboard.php");
+                    }
                 }
+            } else {
+                $_SESSION["wronglogin"] = "❌ Wrong credentials, please try again ...";
             }
         } else {
             $_SESSION["wronglogin"] = "❌ Wrong credentials, please try again ...";
         }
+    
+        mysqli_stmt_close($stmt);
     }
+    
 }
 // Validimi i loginit fundi
 
@@ -191,6 +211,17 @@ if (isset($_POST["login"])) {
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("contextmenu", function(e) {
+            e.preventDefault();
+        }, false);
+
+        document.addEventListener("keydown", function(e) {
+            if (e.key == "F12" || (e.ctrlKey && e.shiftKey && e.key == "I")) {
+                e.preventDefault();
+            }
+        });
+    </script>
 </body>
 
 </html>
